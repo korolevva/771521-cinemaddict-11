@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Vitaly Korolev](https://up.htmlacademy.ru/ecmascript/11/user/771521).
-* Наставник: `Неизвестно`.
+* Наставник: [Mihail Pushkov](https://htmlacademy.ru/profile/id638545).
 
 ---
 
