@@ -1,4 +1,4 @@
-`use strict`;
+'use strict';
 
 const FILM_COUNT = 5;
 
@@ -9,7 +9,7 @@ const createUserRankTemplate = () => {
       <img class="profile__avatar" src="images/bitmap@2x.png" alt="Avatar" width="35" height="35">
     </section>`
   );
-}
+};
 
 const createSiteMenuTemplate = () => {
   return (
@@ -23,7 +23,7 @@ const createSiteMenuTemplate = () => {
       <a href="#stats" class="main-navigation__additional">Stats</a>
     </nav>`
   );
-}
+};
 
 const createSortTemplate = () => {
   return (
@@ -33,7 +33,7 @@ const createSortTemplate = () => {
       <li><a href="#" class="sort__button">Sort by rating</a></li>
     </ul>`
   );
-}
+};
 
 const createFilmsContainerTemplate = () => {
   return (
@@ -44,7 +44,7 @@ const createFilmsContainerTemplate = () => {
         <div class="films-list__container"></div>
     </section>`
   );
-}
+};
 
 const createFilmTemplate = () => {
   return (
@@ -66,13 +66,13 @@ const createFilmTemplate = () => {
       </form>
     </article>`
   );
-}
+};
 
 const createShowMoreButtonTemplate = () => {
   return (
     `<button class="films-list__show-more">Show more</button>`
   );
-}
+};
 
 const createFilmListExtraTemplate = (title) => {
   return (
@@ -82,17 +82,17 @@ const createFilmListExtraTemplate = (title) => {
       <div class="films-list__container">${createFilmTemplate()}${createFilmTemplate()}</div>
     </section>`
   );
-}
+};
 
 const createFooterStatisticsTemplate = () => {
   return (
     `<p>130 291 movies inside</p>`
   );
-}
+};
 
 const render = (container, template, place = `beforeend`) => {
   container.insertAdjacentHTML(place, template);
-}
+};
 
 const userRankElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
