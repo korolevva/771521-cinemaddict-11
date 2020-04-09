@@ -6,6 +6,7 @@ import {createFilmTemplate} from "./components/film.js";
 import {createShowMoreButtonTemplate} from "./components/show-more-button.js";
 import {createFilmListExtraTemplate} from "./components/film-list-extra.js";
 import {createFooterStatisticsTemplate} from "./components/footer-statistics.js";
+import {generateFilms} from "./mock/film.js";
 
 const FILM_COUNT = 5;
 
@@ -26,9 +27,8 @@ const filmContainerElement = siteMainElement.querySelector(`.films`);
 const filmListElement = filmContainerElement.querySelector(`.films-list`);
 const filmElement = filmListElement.querySelector(`.films-list__container`);
 
-for (let i = 0; i < FILM_COUNT; i++) {
-  render(filmElement, createFilmTemplate());
-}
+const films = generateFilms(FILM_COUNT);
+films.forEach(() => render(filmElement, createFilmTemplate()));
 
 render(filmListElement, createShowMoreButtonTemplate());
 render(filmContainerElement, createFilmListExtraTemplate(`Top rated`));
