@@ -1,7 +1,9 @@
+const MAX_COUNT_CHARACTERS = 140;
+
 export const createFilmTemplate = (film) => {
   const {title, raiting, releaseDate, duration, genres, poster, description, countComments} = film;
   const year = `${releaseDate.getFullYear()}`;
-  const descriptionFilm = description.length <= 140 ? description : `${description.slice(0, 140)}...`;
+  const descriptionFilm = description.length <= MAX_COUNT_CHARACTERS ? description : `${description.slice(0, MAX_COUNT_CHARACTERS)}...`;
 
   return (
     `<article class="film-card">

@@ -1,14 +1,14 @@
-import {getRandomIntegerNumber} from "../utils.js";
+import {getRandomNumber} from "../utils.js";
 
 const getGrade = () => {
-  const randomGrade = getRandomIntegerNumber(0, 25);
+  const randomGrade = getRandomNumber(0, 25);
   let grade = ``;
 
   if (randomGrade >= 1 && randomGrade <= 10) {
     grade = `novice`;
   } else if (randomGrade >= 11 && randomGrade <= 20) {
     grade = `fun`;
-  } else if (randomGrade >= 21) {
+  } else {
     grade = `movie buff`;
   }
 

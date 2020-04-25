@@ -1,4 +1,19 @@
-import {MONTH_NAMES, EMOJIS} from "../const.js";
+import {EMOJIS} from "../const.js";
+
+const months = [
+  `January`,
+  `February`,
+  `March`,
+  `April`,
+  `May`,
+  `June`,
+  `July`,
+  `August`,
+  `September`,
+  `October`,
+  `November`,
+  `December`,
+];
 
 const createGenreMarkup = (genre) => {
   return (
@@ -39,7 +54,7 @@ const createEmojisMarkup = (emoji) => {
 export const createFilmDetailsTemplate = (film) => {
   const {title, raiting, releaseDate, duration, genres, poster, description, countComments, originalTitle, director, screenwriters, actors, country, ageRating, comments} = film;
 
-  const date = `${releaseDate.getDate()} ${MONTH_NAMES[releaseDate.getMonth()]} ${releaseDate.getFullYear()}`;
+  const date = `${releaseDate.getDate()} ${months[releaseDate.getMonth()]} ${releaseDate.getFullYear()}`;
   const genreMarkup = genres.map((it) => createGenreMarkup(it)).join(` `);
   const isOneGenre = genres.length > 1 ? true : false;
   const commentsMarkup = comments.map((it) => createCommentsMarkup(it)).join(` `);
