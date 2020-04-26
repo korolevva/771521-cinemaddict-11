@@ -1,4 +1,5 @@
 import {EMOJIS} from "../const.js";
+import {createElement} from "../utils.js";
 
 const months = [
   `January`,
@@ -51,7 +52,7 @@ const createEmojisMarkup = (emoji) => {
   );
 };
 
-export const createFilmDetailsTemplate = (film) => {
+const createFilmDetailsTemplate = (film) => {
   const {title, raiting, releaseDate, duration, genres, poster, description, countComments, originalTitle, director, screenwriters, actors, country, ageRating, comments} = film;
 
   const date = `${releaseDate.getDate()} ${months[releaseDate.getMonth()]} ${releaseDate.getFullYear()}`;
@@ -160,3 +161,27 @@ export const createFilmDetailsTemplate = (film) => {
   </section>`
   );
 };
+
+export default class FilmDetails {
+  constructor(film) {
+    this._film = film;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmDetailsTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

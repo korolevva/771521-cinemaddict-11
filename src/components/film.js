@@ -1,6 +1,8 @@
+import {createElement} from "../utils.js";
+
 const MAX_COUNT_CHARACTERS = 140;
 
-export const createFilmTemplate = (film) => {
+const createFilmTemplate = (film) => {
   const {title, raiting, releaseDate, duration, genres, poster, description, countComments} = film;
   const year = `${releaseDate.getFullYear()}`;
   const descriptionFilm = description.length <= MAX_COUNT_CHARACTERS ? description : `${description.slice(0, MAX_COUNT_CHARACTERS)}...`;
@@ -25,3 +27,27 @@ export const createFilmTemplate = (film) => {
     </article>`
   );
 };
+
+export default class Film {
+  constructor(film) {
+    this._film = film;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
