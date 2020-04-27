@@ -19,7 +19,7 @@ const SHOWING_FILMS_COUNT_ON_START = 5;
 const SHOWING_FILMS_COUNT_BY_BUTTON = 5;
 
 const renderFilm = (filmListElement, film) => {
-  const onFilmCardClick = (evt) => {
+  const openFilmCard = (evt) => {
 
     const target = evt.target.className;
     const isFilmCardOpened = !!document.querySelector(`.film-details`);
@@ -30,17 +30,32 @@ const renderFilm = (filmListElement, film) => {
     }
   };
 
-  const onButtonCloseClick = () => {
+  const closeFilmCard = () => {
     filmDetailsComponent.getElement().remove();
+  };
+
+  const onEscKeyDown = (evt) => {
+    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
+
+    if (isEscKey) {
+      closeFilmCard();
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
   };
 
   const filmComponent = new FilmComponent(film);
   const filmCard = filmComponent.getElement();
-  filmCard.addEventListener(`click`, onFilmCardClick);
+  filmCard.addEventListener(`click`, (evt) => {
+    openFilmCard(evt);
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
 
   const filmDetailsComponent = new FilmDetailsComponent(film);
   const buttonCloseElement = filmDetailsComponent.getElement().querySelector(`.film-details__close-btn`);
-  buttonCloseElement.addEventListener(`click`, onButtonCloseClick);
+  buttonCloseElement.addEventListener(`click`, () => {
+    closeFilmCard();
+    document.removeEventListener(`keydown`, onEscKeyDown);
+  });
 
   render(filmListElement, filmComponent.getElement(), RenderPosition.BEFOREEND);
 };
