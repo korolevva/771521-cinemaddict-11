@@ -1,4 +1,20 @@
-import {MONTH_NAMES, EMOJIS} from "../const.js";
+import {EMOJIS} from "../const.js";
+import {createElement} from "../utils.js";
+
+const months = [
+  `January`,
+  `February`,
+  `March`,
+  `April`,
+  `May`,
+  `June`,
+  `July`,
+  `August`,
+  `September`,
+  `October`,
+  `November`,
+  `December`,
+];
 
 const createGenreMarkup = (genre) => {
   return (
@@ -36,10 +52,10 @@ const createEmojisMarkup = (emoji) => {
   );
 };
 
-export const createFilmDetailsTemplate = (film) => {
+const createFilmDetailsTemplate = (film) => {
   const {title, raiting, releaseDate, duration, genres, poster, description, countComments, originalTitle, director, screenwriters, actors, country, ageRating, comments} = film;
 
-  const date = `${releaseDate.getDate()} ${MONTH_NAMES[releaseDate.getMonth()]} ${releaseDate.getFullYear()}`;
+  const date = `${releaseDate.getDate()} ${months[releaseDate.getMonth()]} ${releaseDate.getFullYear()}`;
   const genreMarkup = genres.map((it) => createGenreMarkup(it)).join(` `);
   const isOneGenre = genres.length > 1 ? true : false;
   const commentsMarkup = comments.map((it) => createCommentsMarkup(it)).join(` `);
@@ -145,3 +161,27 @@ export const createFilmDetailsTemplate = (film) => {
   </section>`
   );
 };
+
+export default class FilmDetails {
+  constructor(film) {
+    this._film = film;
+
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmDetailsTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

@@ -1,5 +1,17 @@
-import {GENRES, EMOJIS} from "../const.js";
-import {getRandomArrayItem, getRandomIntegerNumber} from "../utils.js";
+import {EMOJIS} from "../const.js";
+import {getRandomArrayItem, getRandomNumber} from "../utils.js";
+
+export const genres = [
+  `Action`,
+  `Comedy`,
+  `Crime`,
+  `Drama`,
+  `Epic`,
+  `Horror`,
+  `Musical`,
+  `War`,
+  `Western`,
+];
 
 const titlesFilms = [
   `The Dance of Life`,
@@ -85,12 +97,11 @@ const authorComments = [
 ];
 
 const getDescription = () => {
-  const countSentence = getRandomIntegerNumber(1, 5);
-  let description = ``;
-  for (let i = 0; i < countSentence; i++) {
-    let randomDescription = getRandomArrayItem(descriptions);
-    description = `${description} ${randomDescription}`;
-  }
+  const countSentence = getRandomNumber(1, 5);
+  const description = Array(countSentence).fill(``).map(() => {
+    return getRandomArrayItem(descriptions);
+  }).join(` `);
+
   return description;
 };
 
@@ -98,17 +109,15 @@ const getRaiting = () => {
   return (Math.random() * 10).toFixed(1);
 };
 
-const getRandomListItems = (items, minCount = 1, maxCount = 3) => {
-  const countItems = getRandomIntegerNumber(minCount, maxCount);
-  const listItems = [];
-  while (listItems.length !== countItems) {
-    let randomItem = getRandomArrayItem(items);
-    if (listItems.find((it) => it === randomItem) !== randomItem) {
-      listItems.push(randomItem);
-    }
-  }
+const getRandomListItems = (items, minCount = 1, maxCount = 5) => {
+  const countItems = getRandomNumber(minCount, maxCount);
 
-  return listItems;
+  const randomArrayItems = Array(countItems).fill(``).map(() => {
+    const randomIndex = getRandomNumber(0, items.length - 1);
+    return items[randomIndex];
+  });
+
+  return Array.from(new Set(randomArrayItems));
 };
 
 const getRandomDate = (start, end) => {
@@ -116,7 +125,7 @@ const getRandomDate = (start, end) => {
 };
 
 const getRandomTime = () => {
-  const countMinutes = getRandomIntegerNumber(10, 210);
+  const countMinutes = getRandomNumber(10, 210);
   const hours = Math.trunc(countMinutes / 60);
   const minutes = (countMinutes - (60 * hours));
 
@@ -144,22 +153,22 @@ const generateComment = () => {
 };
 
 const generateFilm = () => {
-  const countRandomComments = getRandomIntegerNumber(0, textComments.length);
+  const countRandomComments = getRandomNumber(0, textComments.length);
   return {
     title: getRandomArrayItem(titlesFilms),
     raiting: getRaiting(),
     releaseDate: getRandomDate(new Date(1900, 0, 1), new Date()),
     duration: getRandomTime(),
-    genres: getRandomListItems(GENRES),
+    genres: getRandomListItems(genres),
     poster: getRandomArrayItem(posters),
     description: getDescription(),
     countComments: countRandomComments,
     originalTitle: getRandomArrayItem(titlesFilms),
     director: getRandomArrayItem(directors),
-    screenwriters: getRandomListItems(screenwriters).map((it) => it).join(`, `),
-    actors: getRandomListItems(actors, 1, 5).map((it) => it).join(`, `),
-    country: getRandomListItems(countries).map((it) => it).join(`, `),
-    ageRating: `${getRandomIntegerNumber(6, 18)}+`,
+    screenwriters: getRandomListItems(screenwriters).join(`, `),
+    actors: getRandomListItems(actors, 1, 5).join(`, `),
+    country: getRandomListItems(countries).join(`, `),
+    ageRating: `${getRandomNumber(6, 18)}+`,
     comments: textComments.map(() => generateComment()).filter((it, i) => i < countRandomComments),
   };
 };
