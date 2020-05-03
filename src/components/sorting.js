@@ -1,33 +1,57 @@
-import {createElement} from "../utils.js";
+import AbstractComponent from "./abstract-component.js";
+
+export const SortType = {
+  DATE: `date`,
+  RATING: `rating`,
+  DEFAULT: `default`,
+};
 
 const createSortTemplate = () => {
   return (
     `<ul class="sort">
-      <li><a href="#" class="sort__button sort__button--active">Sort by default</a></li>
-      <li><a href="#" class="sort__button">Sort by date</a></li>
-      <li><a href="#" class="sort__button">Sort by rating</a></li>
+      <li><a href="#" data-sort-type="${SortType.DEFAULT}" class="sort__button sort__button--active">Sort by default</a></li>
+      <li><a href="#" data-sort-type="${SortType.DATE}" class="sort__button">Sort by date</a></li>
+      <li><a href="#" data-sort-type="${SortType.RATING}" class="sort__button">Sort by rating</a></li>
     </ul>`
   );
 };
 
-export default class Sorting {
+export default class Sorting extends AbstractComponent {
   constructor() {
-    this._element = null;
-  }
+    super();
 
+    this._currenSortType = SortType.DEFAULT;
+  }
   getTemplate() {
     return createSortTemplate();
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  getSortType() {
+    return this._currenSortType;
   }
 
-  removeElement() {
-    this._element = null;
+  setSortTypeChangeHandler(handler) {
+    this.getElement().addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      if (evt.target.tagName !== `A`) {
+        return;
+      }
+
+      const sortType = evt.target.dataset.sortType;
+
+      if (this._currenSortType === sortType) {
+        return;
+      }
+
+      this._currenSortType = sortType;
+
+      const activeElement = Array.from(this.getElement().querySelectorAll(`.sort__button`)).filter((it) => it.classList.contains(`sort__button--active`));
+      if (activeElement[0].className !== evt.target.className) {
+        activeElement[0].classList.remove(`sort__button--active`);
+        evt.target.classList.add(`sort__button--active`);
+      }
+
+      handler(this._currenSortType);
+    });
   }
 }
