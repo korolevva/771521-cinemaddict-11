@@ -1,4 +1,4 @@
-import FilmsListController from "./controllers/filmsList.js";
+import PageController from "./controllers/page.js";
 import FooterStatisticsComponent from "./components/footer-statistics.js";
 import ProfileComponent from "./components/profile.js";
 import SiteMenuComponent from "./components/site-menu.js";
@@ -28,5 +28,5 @@ render(headerElement, profileComponent, RenderPosition.BEFOREEND);
 render(siteMainElement, siteMenuComponent, RenderPosition.BEFOREEND);
 render(countFilmsElement, footerStatisticsComponent, RenderPosition.BEFOREEND);
 
-const filmsListController = new FilmsListController(siteMainElement);
+const filmsListController = new PageController(siteMainElement);
 filmsListController.render(films);
