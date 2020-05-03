@@ -67,7 +67,7 @@ const renderExtraFilmsList = (filmContainer, films) => {
   renderExtraFilms(mostCommentedComponent);
 };
 
-export default class PageController  {
+export default class PageController {
   constructor(container) {
     this._container = container;
 
