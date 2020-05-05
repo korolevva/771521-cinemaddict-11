@@ -1,5 +1,5 @@
 import {EMOJIS} from "../const.js";
-import {getRandomArrayItem, getRandomNumber} from "../utils.js";
+import {getRandomArrayItem, getRandomNumber} from "../utils/common.js";
 
 export const genres = [
   `Action`,

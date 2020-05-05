@@ -1,4 +1,4 @@
-import {createElement} from "../utils.js";
+import AbstractComponent from "./abstract-component.js";
 
 const createFooterStatisticsTemplate = (count) => {
   const formattedNumber = new Intl.NumberFormat(`ru-RU`).format(count);
@@ -7,26 +7,13 @@ const createFooterStatisticsTemplate = (count) => {
   );
 };
 
-export default class FooterStatistics {
+export default class FooterStatistics extends AbstractComponent {
   constructor(count) {
+    super();
     this._count = count;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createFooterStatisticsTemplate(this._count);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

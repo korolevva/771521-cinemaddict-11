@@ -1,4 +1,4 @@
-import {getRandomNumber} from "../utils.js";
+import {getRandomNumber} from "../utils/common.js";
 
 const getGrade = () => {
   const randomGrade = getRandomNumber(0, 25);
