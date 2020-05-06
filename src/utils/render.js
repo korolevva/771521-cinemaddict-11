@@ -25,10 +25,6 @@ export const render = (container, component, place) => {
   }
 };
 
-// export const show = (parent, element) => {
-//   parent.appendChild(element);
-// };
-
 export const hide = (component) => {
   component.getElement().remove();
 };
@@ -36,14 +32,13 @@ export const hide = (component) => {
 export const show = (component) => {
   const parentElement = document.body;
   const newElement = component.getElement();
-  const isExistElements = !!(parentElement && newElement);
+  const areElementsExist = !!(parentElement && newElement);
 
-  if (isExistElements) {
+  if (areElementsExist) {
     parentElement.appendChild(newElement);
   }
 
 };
-
 
 export const remove = (component) => {
   component.getElement().remove();

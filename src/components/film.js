@@ -3,14 +3,14 @@ import AbstractComponent from "./abstract-component.js";
 const MAX_COUNT_CHARACTERS = 140;
 
 const createFilmTemplate = (film) => {
-  const {title, raiting, releaseDate, duration, genres, poster, description, countComments} = film;
+  const {title, rating, releaseDate, duration, genres, poster, description, countComments} = film;
   const year = `${releaseDate.getFullYear()}`;
   const descriptionFilm = description.length <= MAX_COUNT_CHARACTERS ? description : `${description.slice(0, MAX_COUNT_CHARACTERS)}...`;
 
   return (
     `<article class="film-card">
       <h3 class="film-card__title">${title}</h3>
-      <p class="film-card__rating">${raiting}</p>
+      <p class="film-card__rating">${rating}</p>
       <p class="film-card__info">
         <span class="film-card__year">${year}</span>
         <span class="film-card__duration">${duration}</span>

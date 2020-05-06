@@ -53,7 +53,7 @@ const createEmojisMarkup = (emoji) => {
 };
 
 const createFilmDetailsTemplate = (film) => {
-  const {title, raiting, releaseDate, duration, genres, poster, description, countComments, originalTitle, director, screenwriters, actors, country, ageRating, comments} = film;
+  const {title, rating, releaseDate, duration, genres, poster, description, countComments, originalTitle, director, screenwriters, actors, country, ageRating, comments} = film;
 
   const date = `${releaseDate.getDate()} ${months[releaseDate.getMonth()]} ${releaseDate.getFullYear()}`;
   const genreMarkup = genres.map((it) => createGenreMarkup(it)).join(` `);
@@ -83,7 +83,7 @@ const createFilmDetailsTemplate = (film) => {
               </div>
 
               <div class="film-details__rating">
-                <p class="film-details__total-rating">${raiting}</p>
+                <p class="film-details__total-rating">${rating}</p>
               </div>
             </div>
 
