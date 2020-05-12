@@ -1,20 +1,22 @@
 import AbstractSmartComponent from "./abstract-smart-component.js";
 import {EMOJIS} from "../const.js";
+import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format";
 
-const months = [
-  `January`,
-  `February`,
-  `March`,
-  `April`,
-  `May`,
-  `June`,
-  `July`,
-  `August`,
-  `September`,
-  `October`,
-  `November`,
-  `December`,
-];
+// const months = [
+//   `January`,
+//   `February`,
+//   `March`,
+//   `April`,
+//   `May`,
+//   `June`,
+//   `July`,
+//   `August`,
+//   `September`,
+//   `October`,
+//   `November`,
+//   `December`,
+// ];
 
 const createGenreMarkup = (genre) => {
   return (
@@ -24,6 +26,7 @@ const createGenreMarkup = (genre) => {
 
 const createCommentsMarkup = (comment) => {
   const {textComment, emoji, author, dateComment} = comment;
+  let date = moment(dateComment).fromNow();
 
   return (
     `<li class="film-details__comment">
@@ -34,7 +37,7 @@ const createCommentsMarkup = (comment) => {
         <p class="film-details__comment-text">${textComment}</p>
         <p class="film-details__comment-info">
           <span class="film-details__comment-author">${author}</span>
-          <span class="film-details__comment-day">${dateComment}</span>
+          <span class="film-details__comment-day">${date}</span>
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>
@@ -73,13 +76,14 @@ const createImageEmojiMarkup = (emoji) => {
 const createFilmDetailsTemplate = (film, emoji) => {
   const {title, rating, releaseDate, duration, genres, poster, description, countComments, originalTitle, director, screenwriters, actors, country, ageRating, comments, userDetails} = film;
 
-  const date = `${releaseDate.getDate()} ${months[releaseDate.getMonth()]} ${releaseDate.getFullYear()}`;
+  const date = moment(releaseDate).format(`DD MMMM YYYY`);
   const genreMarkup = genres.map((it) => createGenreMarkup(it)).join(` `);
   const isOneGenre = genres.length > 1 ? true : false;
   const commentsMarkup = comments.map((it) => createCommentsMarkup(it)).join(` `);
   const emojisMarkup = EMOJIS.map((it) => createEmojisMarkup(it)).join(` `);
   const userDetailsMarkup = createUserDetailsMarkup(userDetails);
   const imageEmojiMarkup = createImageEmojiMarkup(emoji);
+  const runtime = moment.duration(duration, `minutes`).format(`h[h] mm[m]`);
 
   return (
     `<section class="film-details">
@@ -126,7 +130,7 @@ const createFilmDetailsTemplate = (film, emoji) => {
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>
-                <td class="film-details__cell">${duration}</td>
+                <td class="film-details__cell">${runtime}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Country</td>
@@ -176,6 +180,8 @@ const createFilmDetailsTemplate = (film, emoji) => {
   </section>`
   );
 };
+
+momentDurationFormatSetup(moment);
 
 export default class FilmDetails extends AbstractSmartComponent {
   constructor(film) {

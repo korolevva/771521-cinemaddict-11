@@ -113,30 +113,30 @@ const getRandomDate = (start, end) => {
   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 };
 
-const getRandomTime = () => {
-  const countMinutes = getRandomNumber(10, 210);
-  const hours = Math.trunc(countMinutes / 60);
-  const minutes = (countMinutes - (60 * hours));
+// const getRandomTime = () => {
+//   const countMinutes = getRandomNumber(10, 210);
+//   const hours = Math.trunc(countMinutes / 60);
+//   const minutes = (countMinutes - (60 * hours));
 
-  if (countMinutes < 60) {
-    return `${minutes}m`;
-  } else if (countMinutes % 60 === 0) {
-    return `${hours}h`;
-  } else {
-    return `${hours}h ${minutes}m`;
-  }
-};
+//   if (countMinutes < 60) {
+//     return `${minutes}m`;
+//   } else if (countMinutes % 60 === 0) {
+//     return `${hours}h`;
+//   } else {
+//     return `${hours}h ${minutes}m`;
+//   }
+// };
 
 const generateComment = () => {
   const emoji = getRandomArrayItem(EMOJIS);
   const randomDate = getRandomDate(new Date(2019, 0, 1), new Date());
-  const formatedDate = `${randomDate.getFullYear()}/${randomDate.getMonth() + 1}/${randomDate.getDate()} ${randomDate.getHours()}:${randomDate.getMinutes()}`;
+  // const formatedDate = `${randomDate.getFullYear()}/${randomDate.getMonth() + 1}/${randomDate.getDate()} ${randomDate.getHours()}:${randomDate.getMinutes()}`;
 
   return {
     textComment: getRandomArrayItem(textComments),
     emoji: `${emoji}.png`,
     author: getRandomArrayItem(authorComments),
-    dateComment: formatedDate,
+    dateComment: randomDate,
     emojiType: emoji,
   };
 };
@@ -156,7 +156,7 @@ const generateFilm = () => {
     title: getRandomArrayItem(titlesFilms),
     rating: getRating(),
     releaseDate: getRandomDate(new Date(1900, 0, 1), new Date()),
-    duration: getRandomTime(),
+    duration: getRandomNumber(10, 300),
     genres: getRandomListItems(genres),
     poster: getRandomArrayItem(posters),
     description: getDescription(),
