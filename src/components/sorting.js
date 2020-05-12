@@ -3,6 +3,7 @@ import AbstractComponent from "./abstract-component.js";
 export const SortType = {
   DATE: `date`,
   RATING: `rating`,
+  COMMENTS: `comments`,
   DEFAULT: `default`,
 };
 
@@ -45,9 +46,9 @@ export default class Sorting extends AbstractComponent {
 
       this._currenSortType = sortType;
 
-      const activeElement = Array.from(this.getElement().querySelectorAll(`.sort__button`)).filter((it) => it.classList.contains(`sort__button--active`));
-      if (activeElement[0].className !== evt.target.className) {
-        activeElement[0].classList.remove(`sort__button--active`);
+      const activeElement = Array.from(this.getElement().querySelectorAll(`.sort__button`)).find((it) => it.classList.contains(`sort__button--active`));
+      if (activeElement.className !== evt.target.className) {
+        activeElement.classList.remove(`sort__button--active`);
         evt.target.classList.add(`sort__button--active`);
       }
 
