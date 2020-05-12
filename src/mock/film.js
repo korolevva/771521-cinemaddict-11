@@ -1,5 +1,5 @@
 import {EMOJIS} from "../const.js";
-import {getRandomArrayItem, getRandomNumber} from "../utils/common.js";
+import {getRandomArrayItem, getRandomNumber, getRandomListItems} from "../utils/common.js";
 
 export const genres = [
   `Action`,
@@ -105,19 +105,8 @@ const getDescription = () => {
   return description;
 };
 
-const getRaiting = () => {
+const getRating = () => {
   return (Math.random() * 10).toFixed(1);
-};
-
-const getRandomListItems = (items, minCount = 1, maxCount = 5) => {
-  const countItems = getRandomNumber(minCount, maxCount);
-
-  const randomArrayItems = Array(countItems).fill(``).map(() => {
-    const randomIndex = getRandomNumber(0, items.length - 1);
-    return items[randomIndex];
-  });
-
-  return Array.from(new Set(randomArrayItems));
 };
 
 const getRandomDate = (start, end) => {
@@ -152,11 +141,20 @@ const generateComment = () => {
   };
 };
 
+const getUserDetails = () => {
+  return {
+    isAddToWatchlist: Math.random() > 0.5,
+    isAlreadyWatched: Math.random() > 0.5,
+    watchingDate: getRandomDate(new Date(2019, 0, 1), new Date()),
+    isFavorite: Math.random() > 0.5,
+  };
+};
+
 const generateFilm = () => {
   const countRandomComments = getRandomNumber(0, textComments.length);
   return {
     title: getRandomArrayItem(titlesFilms),
-    raiting: getRaiting(),
+    rating: getRating(),
     releaseDate: getRandomDate(new Date(1900, 0, 1), new Date()),
     duration: getRandomTime(),
     genres: getRandomListItems(genres),
@@ -170,6 +168,7 @@ const generateFilm = () => {
     country: getRandomListItems(countries).join(`, `),
     ageRating: `${getRandomNumber(6, 18)}+`,
     comments: textComments.map(() => generateComment()).filter((it, i) => i < countRandomComments),
+    userDetails: getUserDetails(),
   };
 };
 
