@@ -1,4 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
+import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format";
 
 const MAX_COUNT_CHARACTERS = 140;
 
@@ -13,7 +15,8 @@ const creatUserDetailsMarkup = (userDetails) => {
 
 const createFilmTemplate = (film) => {
   const {title, rating, releaseDate, duration, genres, poster, description, countComments, userDetails} = film;
-  const year = `${releaseDate.getFullYear()}`;
+
+  const year = moment(releaseDate).format(`YYYY`);
   const descriptionFilm = description.length <= MAX_COUNT_CHARACTERS ? description : `${description.slice(0, MAX_COUNT_CHARACTERS)}...`;
   const userDetailsMarkup = creatUserDetailsMarkup(userDetails);
 
@@ -35,6 +38,8 @@ const createFilmTemplate = (film) => {
     </article>`
   );
 };
+
+momentDurationFormatSetup(moment);
 
 export default class Film extends AbstractComponent {
   constructor(film) {
