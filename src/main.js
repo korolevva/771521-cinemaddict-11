@@ -31,5 +31,5 @@ render(headerElement, profileComponent, RenderPosition.BEFOREEND);
 render(siteMainElement, siteMenuComponent, RenderPosition.BEFOREEND);
 render(countFilmsElement, footerStatisticsComponent, RenderPosition.BEFOREEND);
 
-const filmsListController = new PageController(siteMainElement);
+const filmsListController = new PageController(siteMainElement, filmsModel);
 filmsListController.render(films);
