@@ -1,5 +1,11 @@
 import AbstractComponent from "./abstract-component.js";
 
+const FILTER_HREF_PREFIX = `#`;
+
+const getFilterNameById = (href) => {
+  return href.substring(FILTER_HREF_PREFIX.length);
+};
+
 const createFilterMarkup = (filter, isActive) => {
   const {name, count} = filter;
 
@@ -9,15 +15,12 @@ const createFilterMarkup = (filter, isActive) => {
 };
 
 const createFilterTemplate = (filters) => {
-  const filtersMarkup = filters.map((it, i) => createFilterMarkup(it, i === 0)).join(`\n`);
+  const filtersMarkup = filters.map((it) => createFilterMarkup(it, it.checked)).join(`\n`);
 
   return (
-    `<nav class="main-navigation">
-      <div class="main-navigation__items">
-        ${filtersMarkup}
-      </div>
-      <a href="#stats" class="main-navigation__additional">Stats</a>
-    </nav>`
+    `<div class="main-navigation__items">
+      ${filtersMarkup}
+    </div>`
   );
 };
 
@@ -29,5 +32,13 @@ export default class Filter extends AbstractComponent {
 
   getTemplate() {
     return createFilterTemplate(this._filters);
+  }
+
+  setFilterChangeHandler(handler) {
+    this.getElement().addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+      const filterName = getFilterNameById(evt.target.getAttribute(`href`));
+      handler(filterName);
+    });
   }
 }

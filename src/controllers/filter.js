@@ -5,7 +5,7 @@ import {getFilmsByFilter} from "../utils/filter.js";
 
 export default class FilterController {
   constructor(container, filmsModel) {
-    this._container = container;
+    this._container = container.getElement();
     this._filmsModel = filmsModel;
 
     this._activeFilterType = FilterType.ALL;
@@ -35,12 +35,12 @@ export default class FilterController {
     if (oldComponent) {
       replace(this._filterComponent, oldComponent);
     } else {
-      render(container, this._filterComponent, RenderPosition.BEFOREEND);
+      render(container, this._filterComponent, RenderPosition.AFTERBEGIN);
     }
   }
 
   _onFilterChange(filterType) {
-    this._filmsModel.setFilter(filterType);
+    // this._filmsModel.setFilter(filterType);
     this._activeFilterType = filterType;
   }
 

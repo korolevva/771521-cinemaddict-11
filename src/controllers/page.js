@@ -117,8 +117,8 @@ export default class PageController {
     render(filmListElement, this._filmListContainerComponent, RenderPosition.BEFOREEND);
 
     this._renderFilms(films.slice(0, this._showingFilmsCount));
-    this._renderExtraFilmsList(filmContainerElement, this._onDataChange, this._onViewChange);
     this._renderShowMoreButton();
+    this._renderExtraFilmsList(filmContainerElement, this._onDataChange, this._onViewChange);
   }
 
   _renderFilms(films) {
@@ -130,7 +130,7 @@ export default class PageController {
 
   _renderShowMoreButton() {
     remove(this._showMoreButtonComponent);
-    if (this._showingFilmsCount >= this._filmsModel.getFilms()) {
+    if (this._showingFilmsCount >= this._filmsModel.getFilms().length) {
       return;
     }
 
@@ -140,6 +140,8 @@ export default class PageController {
     render(filmListElement, this._showMoreButtonComponent, RenderPosition.BEFOREEND);
 
     this._showMoreButtonComponent.setClickHandler(() => {
+      console.log(this._showingFilmsCount);
+    console.log(this._filmsModel.getFilms().length);
       const prevFilmsCount = this._showingFilmsCount;
       const films = this._filmsModel.getFilms();
       this._showingFilmsCount = this._showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
@@ -149,6 +151,7 @@ export default class PageController {
 
       this._showedFilmControllers = this._showedFilmControllers.concat(newFilms);
     });
+
   }
 
 
