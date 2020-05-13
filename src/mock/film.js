@@ -153,6 +153,7 @@ const getUserDetails = () => {
 const generateFilm = () => {
   const countRandomComments = getRandomNumber(0, textComments.length);
   return {
+    id: String(new Date() + Math.random()),
     title: getRandomArrayItem(titlesFilms),
     rating: getRating(),
     releaseDate: getRandomDate(new Date(1900, 0, 1), new Date()),
