@@ -1,4 +1,4 @@
-import FilterComponent from "../components/site-menu.js";
+import FilterComponent from "../components/filter.js";
 import {FilterType} from "../const.js";
 import {render, replace, RenderPosition} from "../utils/render.js";
 import {getFilmsByFilter} from "../utils/filter.js";

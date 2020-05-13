@@ -1,11 +1,11 @@
 import PageController from "./controllers/page.js";
 import FooterStatisticsComponent from "./components/footer-statistics.js";
 import ProfileComponent from "./components/profile.js";
-import SiteMenuComponent from "./components/site-menu.js";
+import FilterComponent from "./components/filter.js";
 import FilmsModel from "./models/films.js";
 import {generateCountFilms} from "./mock/footer-statistics.js";
 import {generateFilms} from "./mock/film.js";
-import {generateMenuItems} from "./mock/site-menu.js";
+import {generatFilters} from "./mock/filter.js";
 import {generateProfileData} from "./mock/profile.js";
 import {render, RenderPosition} from "./utils/render.js";
 
@@ -17,18 +17,18 @@ const siteFooterElement = document.querySelector(`.footer`);
 const countFilmsElement = siteFooterElement.querySelector(`.footer__statistics`);
 
 const profile = generateProfileData();
-const siteMenu = generateMenuItems();
+const filters = generatFilters();
 const films = generateFilms(FILM_COUNT);
 const filmsModel = new FilmsModel();
 filmsModel.setFilms(films);
 const totalCountFilms = generateCountFilms();
 
 const profileComponent = new ProfileComponent(profile);
-const siteMenuComponent = new SiteMenuComponent(siteMenu);
+const filterComponent = new FilterComponent(filters);
 const footerStatisticsComponent = new FooterStatisticsComponent(totalCountFilms);
 
 render(headerElement, profileComponent, RenderPosition.BEFOREEND);
-render(siteMainElement, siteMenuComponent, RenderPosition.BEFOREEND);
+render(siteMainElement, filterComponent, RenderPosition.BEFOREEND);
 render(countFilmsElement, footerStatisticsComponent, RenderPosition.BEFOREEND);
 
 const filmsListController = new PageController(siteMainElement, filmsModel);
