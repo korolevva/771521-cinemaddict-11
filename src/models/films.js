@@ -11,7 +11,7 @@ export default class Films {
   }
 
   getFilms() {
-    return getFilmsByFilter(this._tasks, this._activeFilterType);
+    return getFilmsByFilter(this._films, this._activeFilterType);
   }
 
   getFilmsAll() {

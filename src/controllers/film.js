@@ -74,8 +74,8 @@ export default class FilmController {
   }
 
   destroy() {
-    remove(this._taskEditComponent);
-    remove(this._taskComponent);
+    remove(this._filmDetailsComponent);
+    remove(this._filmComponent);
     document.removeEventListener(`keydown`, this._onEscKeyDown);
   }
 

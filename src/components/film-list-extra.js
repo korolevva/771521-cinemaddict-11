@@ -1,5 +1,10 @@
 import AbstractComponent from "./abstract-component.js";
 
+// export const titles = [
+//   `Top rated`,
+//     `Most commented`,
+//   ];
+
 export const createFilmListExtraTemplate = (title) => {
   return (
     `<section class="films-list--extra">
