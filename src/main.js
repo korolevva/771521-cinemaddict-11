@@ -16,22 +16,22 @@ const siteMainElement = document.querySelector(`.main`);
 const siteFooterElement = document.querySelector(`.footer`);
 const countFilmsElement = siteFooterElement.querySelector(`.footer__statistics`);
 
-const profile = generateProfileData();
 const films = generateFilms(FILM_COUNT);
 const filmsModel = new FilmsModel();
 filmsModel.setFilms(films);
 const totalCountFilms = generateCountFilms();
 
+const profile = generateProfileData();
 const profileComponent = new ProfileComponent(profile);
-const siteMenuComponent = new SiteMenuComponent();
-
 render(headerElement, profileComponent, RenderPosition.BEFOREEND);
+
+const siteMenuComponent = new SiteMenuComponent();
+render(siteMainElement, siteMenuComponent, RenderPosition.BEFOREEND);
+
 const filterController = new FilterController(siteMenuComponent, filmsModel);
 filterController.render();
+
 const footerStatisticsComponent = new FooterStatisticsComponent(totalCountFilms);
-
-
-render(siteMainElement, siteMenuComponent, RenderPosition.BEFOREEND);
 render(countFilmsElement, footerStatisticsComponent, RenderPosition.BEFOREEND);
 
 const filmsListController = new PageController(siteMainElement, filmsModel);

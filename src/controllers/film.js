@@ -1,7 +1,7 @@
 import FilmComponent from "../components/film.js";
 import FilmDetailsComponent from "../components/film-details.js";
 import {cloneDeep} from 'lodash';
-import {show, hide, render, replace, RenderPosition} from "../utils/render.js";
+import {show, hide, remove, render, replace, RenderPosition} from "../utils/render.js";
 
 const State = {
   DEFAULT: `default`,
@@ -71,6 +71,12 @@ export default class FilmController {
     if (this._mode !== State.DEFAULT) {
       this._closeFilmCard();
     }
+  }
+
+  destroy() {
+    remove(this._taskEditComponent);
+    remove(this._taskComponent);
+    document.removeEventListener(`keydown`, this._onEscKeyDown);
   }
 
   _openFilmCard(evt) {

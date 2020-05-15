@@ -94,8 +94,11 @@ export default class PageController {
     this._onSortTypeChange = this._onSortTypeChange.bind(this);
     this._renderExtraFilmsList = this._renderExtraFilmsList.bind(this);
     this._onViewChange = this._onViewChange.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
+
 
     this._sortingComponent.setSortTypeChangeHandler(this._onSortTypeChange);
+    this._filmsModel.setFilterChangeHandler(this._onFilterChange);
   }
 
   render() {
@@ -119,6 +122,11 @@ export default class PageController {
     this._renderFilms(films.slice(0, this._showingFilmsCount));
     this._renderShowMoreButton();
     this._renderExtraFilmsList(filmContainerElement, this._onDataChange, this._onViewChange);
+  }
+
+  _removeFilms() {
+    this._showedFilmControllers.forEach((filmController) => filmController.destroy());
+    this._showedFilmControllers = [];
   }
 
   _renderFilms(films) {
@@ -152,6 +160,11 @@ export default class PageController {
 
   }
 
+  _updateFilms(count) {
+    this._removeFilms();
+    this._renderFilms(this._filmsModel.getFilms().slice(0, count));
+    this._renderLoadMoreButton();
+  }
 
   _onDataChange(filmController, oldData, newData) {
     const isSuccess = this._filmsModel.updateFilm(oldData.id, newData);
@@ -159,6 +172,10 @@ export default class PageController {
     if (isSuccess) {
       filmController.render(newData);
     }
+  }
+
+  _onFilterChange() {
+    this._updateFilms(SHOWING_FILMS_COUNT_ON_START);
   }
 
   _onViewChange() {
