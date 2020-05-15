@@ -140,8 +140,6 @@ export default class PageController {
     render(filmListElement, this._showMoreButtonComponent, RenderPosition.BEFOREEND);
 
     this._showMoreButtonComponent.setClickHandler(() => {
-      console.log(this._showingFilmsCount);
-    console.log(this._filmsModel.getFilms().length);
       const prevFilmsCount = this._showingFilmsCount;
       const films = this._filmsModel.getFilms();
       this._showingFilmsCount = this._showingFilmsCount + SHOWING_FILMS_COUNT_BY_BUTTON;
