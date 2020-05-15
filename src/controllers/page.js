@@ -210,14 +210,11 @@ export default class PageController {
   _onSortTypeChange(sortType) {
     this._showingFilmsCount = SHOWING_FILMS_COUNT_ON_START;
 
-    const filmListContainerElement = this._filmListContainerComponent.getElement();
-
     const sortedFilms = getSortedFilms(this._filmsModel.getFilms(), sortType, 0, this._showingFilmsCount);
-
-    filmListContainerElement.innerHTML = ``;
-
-    const newFilms = renderFilms(filmListContainerElement, sortedFilms, this._onDataChange, this._onViewChange);
-    this._showedFilmControllers = newFilms;
+    this._removeFilms();
+    this._removeExtraFilms();
+    this._renderFilms(sortedFilms);
+    this._renderExtraFilmsList(this._filmsModel.getFilms());
 
     this._renderShowMoreButton();
   }
