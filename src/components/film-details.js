@@ -188,7 +188,7 @@ export default class FilmDetails extends AbstractSmartComponent {
     super();
 
     this._film = film;
-    this._buttonCloseClickHandler = null;
+    // this._buttonCloseClickHandler = null;
     this._emoje = `smile`;
 
     this._onEmojiClick();
@@ -210,7 +210,19 @@ export default class FilmDetails extends AbstractSmartComponent {
   setButtonCloseClickHandler(handler) {
     this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, handler);
 
-    this._buttonCloseClickHandler = handler;
+    // this._buttonCloseClickHandler = handler;
+  }
+
+  setAddToWatchlistButtonClickHandler(handler) {
+    this.getElement().querySelector(`#watchlist`).addEventListener(`click`, handler);
+  }
+
+  setMarkAsWatchedButtonClickHandler(handler) {
+    this.getElement().querySelector(`#watched`).addEventListener(`click`, handler);
+  }
+
+  setMarkAsFavoritedButtonClickHandler(handler) {
+    this.getElement().querySelector(`#favorite`).addEventListener(`click`, handler);
   }
 
   _onEmojiClick() {

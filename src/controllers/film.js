@@ -39,24 +39,27 @@ export default class FilmController {
     });
 
     this._filmComponent.setAddToWatchlistButtonClickHandler((evt) => {
-      evt.preventDefault();
-      const filmCopy = cloneDeep(film);
-      filmCopy.userDetails.isAddToWatchlist = !(filmCopy.userDetails.isAddToWatchlist);
-      this._onDataChange(this, film, filmCopy);
+      this._onAddToWatchlistButtonClick(film, evt);
+    });
+
+    this._filmDetailsComponent.setAddToWatchlistButtonClickHandler((evt) => {
+      this._onAddToWatchlistButtonClick(film, evt);
     });
 
     this._filmComponent.setMarkAsWatchedButtonClickHandler((evt) => {
-      evt.preventDefault();
-      const filmCopy = cloneDeep(film);
-      filmCopy.userDetails.isAlreadyWatched = !(filmCopy.userDetails.isAlreadyWatched);
-      this._onDataChange(this, film, filmCopy);
+      this._onMarkAsWatchedButtonClick(film, evt);
+    });
+
+    this._filmDetailsComponent.setMarkAsWatchedButtonClickHandler((evt) => {
+      this._onMarkAsWatchedButtonClick(film, evt);
     });
 
     this._filmComponent.setMarkAsFavoritedButtonClickHandler((evt) => {
-      evt.preventDefault();
-      const filmCopy = cloneDeep(film);
-      filmCopy.userDetails.isFavorite = !(filmCopy.userDetails.isFavorite);
-      this._onDataChange(this, film, filmCopy);
+      this._onMarkAsFavoritedButtonClick(film, evt);
+    });
+
+    this._filmDetailsComponent.setMarkAsFavoritedButtonClickHandler((evt) => {
+      this._onMarkAsFavoritedButtonClick(film, evt);
     });
 
     if (oldFilmDetailsComponent && oldFilmComponent) {
@@ -101,6 +104,27 @@ export default class FilmController {
       this._closeFilmCard();
       document.removeEventListener(`keydown`, this._onEscKeyDown);
     }
+  }
+
+  _onAddToWatchlistButtonClick(film, evt) {
+    evt.preventDefault();
+    const filmCopy = cloneDeep(film);
+    filmCopy.userDetails.isAddToWatchlist = !(filmCopy.userDetails.isAddToWatchlist);
+    this._onDataChange(this, film, filmCopy);
+  }
+
+  _onMarkAsWatchedButtonClick(film, evt) {
+    evt.preventDefault();
+    const filmCopy = cloneDeep(film);
+    filmCopy.userDetails.isAlreadyWatched = !(filmCopy.userDetails.isAlreadyWatched);
+    this._onDataChange(this, film, filmCopy);
+  }
+
+  _onMarkAsFavoritedButtonClick(film, evt) {
+    evt.preventDefault();
+    const filmCopy = cloneDeep(film);
+    filmCopy.userDetails.isFavorite = !(filmCopy.userDetails.isFavorite);
+    this._onDataChange(this, film, filmCopy);
   }
 
 }

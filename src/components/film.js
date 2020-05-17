@@ -58,7 +58,6 @@ export default class Film extends AbstractComponent {
 
   setAddToWatchlistButtonClickHandler(handler) {
     this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`).addEventListener(`click`, handler);
-    // this._addToWatchlistButtonClickHandler = handler;
   }
 
   setMarkAsWatchedButtonClickHandler(handler) {
