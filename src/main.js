@@ -4,6 +4,7 @@ import FooterStatisticsComponent from "./components/footer-statistics.js";
 import ProfileComponent from "./components/profile.js";
 import FilmsModel from "./models/films.js";
 import SiteMenuComponent from "./components/site-menu.js";
+import StatisticComponent from "./components/statistic.js";
 import {generateCountFilms} from "./mock/footer-statistics.js";
 import {generateFilms} from "./mock/film.js";
 import {generateProfileData} from "./mock/profile.js";
@@ -30,6 +31,9 @@ render(siteMainElement, siteMenuComponent, RenderPosition.BEFOREEND);
 
 const filterController = new FilterController(siteMenuComponent, filmsModel);
 filterController.render();
+
+const statisticComponent = new StatisticComponent();
+render(siteMenuComponent.getElement(), statisticComponent, RenderPosition.BEFOREEND);
 
 const footerStatisticsComponent = new FooterStatisticsComponent(totalCountFilms);
 render(countFilmsElement, footerStatisticsComponent, RenderPosition.BEFOREEND);
