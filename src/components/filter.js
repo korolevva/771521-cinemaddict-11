@@ -10,7 +10,6 @@ const createFilterMarkup = (filter, isActive) => {
   const {name, count} = filter;
 
   return (
-    // `<a href="#${isActive ? `all` : name.toLowerCase()}" class="main-navigation__item ${isActive ? `main-navigation__item--active` : ``}">${name} <span class="main-navigation__item-count">${count}</span></a>`
     `<a href="#${name}" class="main-navigation__item ${isActive ? `main-navigation__item--active` : ``}">${name} <span class="main-navigation__item-count">${count}</span></a>`
   );
 };
@@ -38,6 +37,16 @@ export default class Filter extends AbstractComponent {
   setFilterChangeHandler(handler) {
     this.getElement().addEventListener(`click`, (evt) => {
       evt.preventDefault();
+      if (evt.target.tagName !== `A`) {
+        return;
+      }
+
+      const activeElement = Array.from(this.getElement().querySelectorAll(`.main-navigation__item`)).find((it) => it.classList.contains(`main-navigation__item--active`));
+      if (activeElement.className !== evt.target.className) {
+        activeElement.classList.remove(`main-navigation__item--active`);
+        evt.target.classList.add(`main-navigation__item--active`);
+      }
+
       const filterName = getFilterName(evt.target.getAttribute(`href`));
       handler(filterName);
     });
