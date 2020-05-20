@@ -3,21 +3,6 @@ import {EMOJIS} from "../const.js";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 
-// const months = [
-//   `January`,
-//   `February`,
-//   `March`,
-//   `April`,
-//   `May`,
-//   `June`,
-//   `July`,
-//   `August`,
-//   `September`,
-//   `October`,
-//   `November`,
-//   `December`,
-// ];
-
 const createGenreMarkup = (genre) => {
   return (
     `<span class="film-details__genre">${genre}</span>`
@@ -221,6 +206,18 @@ export default class FilmDetails extends AbstractSmartComponent {
 
   setMarkAsFavoritedButtonClickHandler(handler) {
     this.getElement().querySelector(`#favorite`).addEventListener(`click`, handler);
+  }
+
+  setDeleteButtonClickHandler(handler) {
+    this.getElement().querySelector(`.film-details__comments-list`).addEventListener(`click`, (evt) => {
+      evt.preventDefault();
+
+      if (evt.target.tagName !== `BUTTON`) {
+        return;
+      }
+      handler();
+    });
+
   }
 
   _onEmojiClick() {

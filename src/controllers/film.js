@@ -62,6 +62,10 @@ export default class FilmController {
       this._onMarkAsFavoritedButtonClick(film, evt);
     });
 
+    this._filmDetailsComponent.setDeleteButtonClickHandler(() => {
+      console.log(`delete`);
+    });
+
     if (oldFilmDetailsComponent && oldFilmComponent) {
       replace(this._filmComponent, oldFilmComponent);
       replace(this._filmDetailsComponent, oldFilmDetailsComponent);

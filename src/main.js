@@ -38,5 +38,5 @@ render(siteMenuComponent.getElement(), statisticComponent, RenderPosition.BEFORE
 const footerStatisticsComponent = new FooterStatisticsComponent(totalCountFilms);
 render(countFilmsElement, footerStatisticsComponent, RenderPosition.BEFOREEND);
 
-const filmsListController = new PageController(siteMainElement, filmsModel);
-filmsListController.render(films);
+const pageController = new PageController(siteMainElement, filmsModel);
+pageController.render(films);
