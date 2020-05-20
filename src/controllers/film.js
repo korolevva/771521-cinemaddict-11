@@ -63,7 +63,7 @@ export default class FilmController {
     });
 
     this._filmDetailsComponent.setDeleteButtonClickHandler(() => {
-      console.log(`delete`);
+
     });
 
     if (oldFilmDetailsComponent && oldFilmComponent) {
